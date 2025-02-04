@@ -1,0 +1,37 @@
+version: 2.1
+
+jobs:
+  build_and_run:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout  # Clone le repo
+      - run:
+          name: Build Docker image
+          command: docker build -t my-app-image .
+      - run:
+          name: Run Docker container
+          command: docker run -d -p 8080:8080 my-app-image
+      - run:
+          name: Test with curl
+          command: |
+            sleep 5  # Wait for the app to start
+            curl -s http://localhost:8080 | grep "Welcome"
+
+      - run:
+          name: Log in to Docker Hub
+          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+      - run:
+          name: Tag Docker image
+          command: docker tag my-app-image jagaa1234/my-app-image:latest
+
+      - run:
+          name: Push Docker image to Docker Hub
+          command: docker push jagaa1234/my-app-image:latest
+
+workflows:
+  version: 2
+  build_and_run:
+    jobs:
+      - build_and_run
