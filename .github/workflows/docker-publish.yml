@@ -1,0 +1,32 @@
+name: Docker Build and Run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: docker build -t my-app-image .
+
+      - name: Run Docker container
+        run: docker run -d -p 8080:8080 --name my-app my-app-image
+
+      - name: Wait for app to start
+        run: sleep 5
+
+      - name: Test with curl
+        run: curl -s http://localhost:8080 | grep "Welcome"
