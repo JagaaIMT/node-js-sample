@@ -7,14 +7,14 @@ jobs:
     steps:
       - checkout  # Clone le repo
       - run:
-        name: Build Docker image
-        command: docker build -t my-app-image .
+          name: Build Docker image
+          command: docker build -t my-app-image .
       - run:
-        name: Run Docker container
-        command: docker run -d -p 8080:8080 my-app-image
+          name: Run Docker container
+          command: docker run -d -p 8080:8080 my-app-image
       - run:
-        name: test with curl
-        command: curl -s http://localhost:8080
+          name: Test with curl
+          command: curl -s http://localhost:8080
 
 workflows:
   version: 2
