@@ -14,7 +14,7 @@ jobs:
           command: docker run -d -p 8080:8080 my-app-image
       - run:
           name: Test with curl
-          command: curl -s http://localhost:8080
+          command: curl -s http://localhost:080
 
 workflows:
   version: 2
