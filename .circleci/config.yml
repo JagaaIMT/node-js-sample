@@ -14,7 +14,9 @@ jobs:
           command: docker run -d -p 8080:8080 my-app-image
       - run:
           name: Test with curl
-          command: curl -s http://localhost:080
+          command: |
+            sleep 5  # Wait for the app to start
+            curl -s http://localhost:8080 | grep "Welcome"
 
 workflows:
   version: 2
