@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: Push Docker image to Docker Hub
-          command: docker push jagaa1234/my-app-image:last
+          command: docker push jagaa1234/my-app-image:latest
 
 workflows:
   version: 2
