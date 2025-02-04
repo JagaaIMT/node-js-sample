@@ -24,11 +24,11 @@ jobs:
 
       - run:
           name: Tag Docker image
-          command: docker tag my-app-image louis/my-app-image:latest
+          command: docker tag my-app-image jagaa1234/my-app-image:latest
 
       - run:
           name: Push Docker image to Docker Hub
-          command: docker push louis/my-app-image:last
+          command: docker push jagaa1234/my-app-image:last
 
 workflows:
   version: 2
