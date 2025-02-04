@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build_and_run:
     machine:
-      image: circleci/classic:latest  # Utilisation d'une machine CircleCI
+      image: ubuntu-2204:current
     steps:
       - checkout  # Clone le repo
       - run:
