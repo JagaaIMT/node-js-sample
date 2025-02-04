@@ -2,16 +2,19 @@ version: 2.1
 
 jobs:
   build_and_run:
-    docker:
-      - image: node:14  # Utilisation de l'image officielle Node.js
+    machine:
+      image: circleci/classic:latest  # Utilisation d'une machine CircleCI
     steps:
       - checkout  # Clone le repo
       - run:
-          name: Installer les dépendances
-          command: npm install
+        name: Build Docker image
+        command: docker build -t my-app-image .
       - run:
-          name: Lancer l'application
-          command: npm start
+        name: Run Docker container
+        command: docker run -d -p 8080:8080 my-app-image
+      - run:
+        name: test with curl
+        command: curl -s http://localhost:8080
 
 workflows:
   version: 2
